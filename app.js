@@ -15,7 +15,7 @@ function Folder(props) {
     const { node, iconName, index, onSelect, prevIndex, active } = props;
     const onClick = useCallback(() => {
         let select = prevIndex + "-" + index.toString();
-        onSelect(select, true);
+        onSelect(select, !node.IsFolder);
     }, [props]);
 
     let cls = "folder";
@@ -40,6 +40,7 @@ function BlockPicker() {
     const [inventory, setInventory] = useState(null);
     const [folder, setFolder] = useState([]);
     const [index, setIndex] = useState("-0");
+    const [clipboardText, setClipboardText] = useState(null);
     
     useEffect(() => {
         fetch("BlockInfoInventory.gbx.json")
@@ -55,7 +56,13 @@ function BlockPicker() {
     const onSelect = useCallback((index, isItem) => {
         if (isItem)
         {
-            navigator.clipboard.writeText(index.split("-").slice(1).map(x => parseInt(x) + 1).join("-"));
+            let path = index.split("-").slice(1).map(x => parseInt(x) + 1).join("-");
+            navigator.clipboard.writeText(path);
+            setClipboardText(path);
+        }
+        else 
+        {
+            setClipboardText(null);
         }
 
         setIndex(index);
@@ -98,20 +105,22 @@ function BlockPicker() {
 
     return html`
         ${folder}
+        ${
+            clipboardText != null 
+                ? html`<p style="color: white; font-style: italic">${clipboardText} was copied to the clipboard!</p>`
+                : null
+        }
     `;
 }
 
 function App() {
-    const [inventory, setInventory] = useState(null);
-    
-    useEffect(() => {
-        fetch("/BlockInfoInventory.gbx.json")
-            .then(resp => resp.json())
-            .then(data => setInventory(data));
-    }, []);
-
     return html`
-        <h1 style="color: white">Trackmania Block Picker</h1>
+        <div>
+            <h1 style="color: white">Trackmania Block Picker</h1>
+            <p style="color: lightgrey; font-style: italic">Clicking a block will copy its path to the clipboard.</p>
+            <p style="color: lightgrey; font-style: italic">Not affiliated with or endorsed by Nadeo or Ubisoft. All relevant trademarks belong to their respective owners.</p>
+        </div>
+        <hr/>
         <${BlockPicker} />
     `;
 }
