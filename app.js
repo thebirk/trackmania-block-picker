@@ -47,11 +47,6 @@ function BlockPicker() {
             .then(resp => resp.json())
             .then(data => setInventory(data));
     }, []);
-
-    if (inventory != null)
-    {
-        console.log(inventory);
-    }
     
     const onSelect = useCallback((index, isItem) => {
         if (isItem)
