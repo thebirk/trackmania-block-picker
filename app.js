@@ -42,7 +42,7 @@ function BlockPicker() {
     const [index, setIndex] = useState("-0");
     
     useEffect(() => {
-        fetch("/BlockInfoInventory.gbx.json")
+        fetch("BlockInfoInventory.gbx.json")
             .then(resp => resp.json())
             .then(data => setInventory(data));
     }, []);
