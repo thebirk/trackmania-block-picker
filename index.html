@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="end">
+<head>
+    <title>Trackmania Block Picker</title>
+
+    <style>
+        html {
+            background-color: #015a43;
+
+            font-family: sans-serif;
+        }
+
+        /* green no hover #3ac568 */
+        /* green active #55ec83 */
+        .folder {
+            position: relative;
+            background-color: #f4cd0b;
+            max-width: 64px;
+            max-height: 64px;
+            text-align: center;
+            display: inline-block;
+            padding: 16px 16px;
+            margin: 2px 2px;
+
+            border-radius: 8px;
+
+            /*transform: skew(-10deg);*/
+
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .folder--block {
+            background-color: #a0a0a0;
+        }
+
+        .folder.folder--active {
+            background-color: #55ec83 !important;
+        }
+
+        .folder--block.folder--active {
+            background-color: #c8c8c8 !important;
+        }
+
+        .folder span {
+            position: absolute;
+            left: 4px;
+            top: 2px;
+
+            color: darkblue;
+        }
+
+        .folder:hover {
+            background-color: darkorange;
+        }
+
+        .folder img {
+            /* transform: skew(10deg); */
+            user-select: none;
+            width: 64px;
+            height: 64px;
+        }
+    </style>
+</head>
+<body>
+    <noscript>This website requires javascript in order to operate. Sorry for the inconvenience.</noscript>
+    <script type="module" src="./app.js"></script>
+</body>
+</html>
