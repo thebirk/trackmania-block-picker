@@ -4,6 +4,7 @@ using GBX.NET.Engines.TrackMania;
 
 using ImageProcessor;
 using ImageProcessor.Imaging.Formats;
+using ImageProcessor.Plugins.WebP.Imaging.Formats;
 
 if (args.Length != 2)
 {
@@ -36,20 +37,18 @@ foreach (var filePath in fileNames)
     }
 
     var path = Path.Combine(outPath, collector.Name!.ToLowerInvariant());
-    var pngFileName = path + ".png";
+    var webpFileName = path + ".webp";
 
     if (collector.IconWebP != null)
     {
         using var imageFactory = new ImageFactory(preserveExifData: false)
             .Load(collector.IconWebP)
             .Flip(flipVertically: true)
-            .Format(new PngFormat
+            .Format(new WebPFormat
             {
                 Quality = 100,
             })
-            .Save(pngFileName);
-        
-        //Console.WriteLine("{0} exported!", pngFileName);
+            .Save(webpFileName);
     }
     else
     {
