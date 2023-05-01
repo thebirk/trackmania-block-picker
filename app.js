@@ -31,7 +31,7 @@ function Folder(props) {
     return html`
         <div class="${cls}" onclick="${onClick}">
             <span>${node.IsFolder ? (index + 1) : (prevIndex + "-" + index.toString()).split("-").slice(1).map(x => parseInt(x) + 1).join("-")}</span>
-            <img src="out/${iconName.toLowerCase()}.edclassic.gbx.png" draggable="${false}"/>
+            <img src="out/${iconName.toLowerCase()}.png" draggable="${false}"/>
         </div>
     `
 }
